@@ -124,7 +124,7 @@ export default {};
 }
 
 .right {
-    padding: 2.2rem 4rem;
+    padding: 1.8rem 4rem;
 }
 .right > h1 {
     max-width: 30ch;
@@ -176,6 +176,9 @@ export default {};
     .right > h1 {
         text-align: center;
     }
+    .steps > div {
+        padding: 1rem 0;
+    }
     .steps h1 {
         margin: 0;
         text-align: center;
@@ -185,15 +188,16 @@ export default {};
         /* border: 1px solid red; */
     }
     .steps__CTA {
-        /* display: block; */
+        margin-top: 1.8rem;
+        margin-bottom: 2.5rem;
         width: 100%;
         text-align: center;
     }
     .left {
-        padding: 0 1rem;
+        padding: 0 1.2rem;
     }
     .left p {
-    max-width: 40ch;
+        max-width: 40ch;
     }
 }
 </style>

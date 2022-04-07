@@ -1,6 +1,9 @@
 <template>
-    <div class="flex navigation-buttons">
-        <button class="back-btn" @click="$parent.$emit('changeComponent', back)">
+    <div class="flex navigation-buttons" id="navigation-buttons">
+        <button
+            class="back-btn"
+            @click="$parent.$emit('changeComponent', back)"
+        >
             <img src="../assets/icons/chevron_pink.png" alt="" />
             Terug
         </button>
@@ -8,7 +11,7 @@
             class="proceed-btn active"
             @click="$parent.$emit('changeComponent', proceed)"
         >
-            {{proceedBtnValue}}
+            {{ proceedBtnValue }}
             <img src="../assets/icons/chevron_pink.png" alt="" />
         </button>
     </div>
@@ -20,18 +23,18 @@ export default {
         proceed: {
             type: String,
             required: true,
-            default: 'Home'
+            default: "Home",
         },
         back: {
             type: String,
             required: true,
-            default: 'Home'
+            default: "Home",
         },
         proceedBtnValue: {
             type: String,
-            default: 'Verder'
-        }
-    }
+            default: "Verder",
+        },
+    },
 };
 </script>
 
@@ -53,17 +56,18 @@ export default {
 }
 .proceed-btn.active {
     background-color: #ff0083;
-    color: white
+    color: white;
 }
 .proceed-btn.active img {
     filter: brightness(0) invert(1);
 }
 @media only screen and (max-width: 768px) {
-    .navigation-buttons {
-        flex-direction: column-reverse !important;
+    #navigation-buttons {
+        flex-direction: column-reverse;
+        padding: 1.8rem 0;
     }
-    .back-btn {
-        border: none !important;
+    #navigation-buttons .back-btn {
+        border: none;
     }
 }
 </style>

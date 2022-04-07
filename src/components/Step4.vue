@@ -37,16 +37,18 @@
                         name="message"
                         rows="4"
                         placeholder="Voeg een bericht toe (niet verplicht)"
-
                     />
                     <FormulateInput
                         type="submit"
                         value="submit"
                         element-class="proceed-btn"
-
                     />
                 </FormulateForm>
-                <NavigationBtns proceed="ThankYou" back="Step3" proceedBtnValue="Aanvraag versturen" />
+                <NavigationBtns
+                    proceed="ThankYou"
+                    back="Step3"
+                    proceedBtnValue="Aanvraag versturen"
+                />
             </div>
         </div>
     </div>
@@ -67,8 +69,8 @@ export default {
     },
     methods: {
         send() {
-            console.log('submitted')
-        }
+            console.log("submitted");
+        },
     },
     activated() {
         window.scroll({

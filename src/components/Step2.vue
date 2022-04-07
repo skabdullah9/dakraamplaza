@@ -1,8 +1,6 @@
 <template>
     <div class="container step-2">
-        <h1 class="steps__title">
-            Bereken eenvoudig de kosten met onze tool
-        </h1>
+        <h1 class="steps__title">Bereken eenvoudig de kosten met onze tool</h1>
         <div class="flex">
             <StepsProgressBar :step="2" />
             <div class="steps__form">
@@ -23,14 +21,31 @@
                         placeholder="Huisnummer"
                         validation="required"
                     />
-                    <div class="flex partners border-top" v-for="partner in partners" :key="partner.partner_name">
+                    <div
+                        class="flex partners border-top"
+                        id="partners"
+                        v-for="partner in partners"
+                        :key="partner.partner_name"
+                    >
                         <FormulateInput
                             type="checkbox"
                             :name="partner.partner_name"
                             element-class="checkbox-container"
                             :id="partner.partner_name"
                         />
-                        <label :for="partner.partner_name" class="partner"><h3>{{partner.partner_name}}</h3><div class="flex">4.7 <img src="../assets/icons/stars.png" alt=""> (148) | 1.7 km</div><div>{{partner.partner_location}}<br>{{partner.partner_response}}</div></label>
+                        <label :for="partner.partner_name" class="partner"
+                            ><h3>{{ partner.partner_name }}</h3>
+                            <div class="flex">
+                                4.7
+                                <img src="../assets/icons/stars.png" alt="" />
+                                (148) | 1.7 km
+                            </div>
+                            <div>
+                                {{ partner.partner_location }}<br />{{
+                                    partner.partner_response
+                                }}
+                            </div></label
+                        >
                     </div>
                 </FormulateForm>
                 <button class="show-more-btn">
@@ -59,9 +74,17 @@ export default {
         return {
             formData: {},
             partners: [
-                {partner_name: "Dakraam Vervangservice", partner_location: 'Leiderdorp', partner_response: " Gemiddelde responstijd: binnen een dag"},
-                 {partner_name: "Bendabouw Geveltechniek", partner_location: 'Nootdorp', partner_response: "Gemiddelde responstijd: 6 dagen"}
-            ]
+                {
+                    partner_name: "Dakraam Vervangservice",
+                    partner_location: "Leiderdorp",
+                    partner_response: " Gemiddelde responstijd: binnen een dag",
+                },
+                {
+                    partner_name: "Bendabouw Geveltechniek",
+                    partner_location: "Nootdorp",
+                    partner_response: "Gemiddelde responstijd: 6 dagen",
+                },
+            ],
         };
     },
     activated() {
@@ -74,17 +97,15 @@ export default {
 </script>
 
 <style>
-
-
 .partners .formulate-input-group-item {
     border-top: 1px solid #e4e4e4;
     padding: 1.25rem 0;
     width: 100%;
 }
-.partners {
+#partners {
     padding: 1.25rem 0;
-    flex-direction: row !important;
-    gap: 1rem !important;
+    flex-direction: row;
+    gap: 1rem;
 }
 .partners .checkbox-container {
     margin-top: 0;
@@ -93,7 +114,7 @@ export default {
 .partner .flex {
     align-items: center;
     margin: 5px 0;
-    flex-direction: row ;
+    flex-direction: row;
 }
 .partner h3 {
     margin-top: 0;

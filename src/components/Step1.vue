@@ -106,7 +106,7 @@
                         <span>Niet-VELUX dakraam vervangen</span>
                     </template>
                     <template v-slot:content>
-                        <div class="form-wrapper">
+                        <div class="form-wrapper" id="form-wrapper">
                             <p class="gray">Maten oude dakraam (b x h), cm</p>
                             <FormulateForm v-model="formData">
                                 <FormulateInput
@@ -172,7 +172,7 @@
                         Nee: 'Nee',
                     }"
                 />
-                <div class="total flex border-top">
+                <div class="total flex border-top" id="total">
                     <div class="total__text">
                         <h2>Geschatte prijs:</h2>
                         <p class="gray">
@@ -247,6 +247,7 @@ export default {
 .total__text h2 {
     margin-bottom: 0;
     margin-top: 1.8rem;
+    font-size: calc(20px + (24 - 20) * ((100vw - 300px) / (1600 - 300)));
 }
 .total__text p {
     margin-top: 0.3rem;
@@ -268,9 +269,9 @@ export default {
     .steps__form {
         margin-top: 0;
     }
-    .total,
-    .form-wrapper .flex {
-        flex-direction: row !important;
+    #total,
+    #form-wrapper .flex {
+        flex-direction: row;
     }
 }
 </style>

@@ -110,6 +110,15 @@ textarea {
     resize: vertical;
     margin-bottom: 0;
 }
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+div[data-type="select"] select:focus {
+    border-color: #ff0083;
+}
+
 /* CUSTOM DROPDOWN MENU (SELECT) */
 div[data-type="select"] {
     position: relative;
@@ -192,6 +201,7 @@ div[data-type="select"] select[data-placeholder-selected] {
 }
 .checkbox-container .formulate-input-wrapper {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .checkbox-container .formulate-input-wrapper > label {
@@ -205,7 +215,7 @@ div[data-type="select"] select[data-placeholder-selected] {
     width: 21px;
     height: 21px;
     background-color: #f0f0f0;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -213,9 +223,14 @@ div[data-type="select"] select[data-placeholder-selected] {
 .checkbox-container input[type="checkbox"] {
     display: none;
 }
+.checkbox-container input[type="radio"] + label::after,
+.checkbox-container input[type="checkbox"] + label::after {
+    content: url(../assets/icons/correct.png);
+    display: none;
+}
 .checkbox-container input[type="radio"]:checked + label::after,
 .checkbox-container input[type="checkbox"]:checked + label::after {
-    content: url(../assets/icons/correct.png);
+    display: block;
 }
 .checkbox-label {
     font-family: "Gilroy-Bold", sans-serif;
@@ -240,9 +255,9 @@ div[data-type="select"] select[data-placeholder-selected] {
 }
 
 .formulate-input-errors {
-    /* padding-left: 1rem; */
     margin-top: 0;
     color: #ff0083;
+    opacity: 0.6;
 }
 
 @media only screen and (max-width: 768px) {
@@ -258,7 +273,7 @@ div[data-type="select"] select[data-placeholder-selected] {
         white-space: normal;
     }
     div[data-type="select"]::after {
-        right: 1.5rem;
+        right: 2rem;
     }
     input[type="text"],
     input[type="number"],
