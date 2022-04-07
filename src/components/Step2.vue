@@ -1,10 +1,10 @@
 <template>
-    <div class="container">
-        <h1 class="steps__title bold">
+    <div class="container step-2">
+        <h1 class="steps__title">
             Bereken eenvoudig de kosten met onze tool
         </h1>
         <div class="flex">
-            <StepsProgressBar step="2" />
+            <StepsProgressBar :step="2" />
             <div class="steps__form">
                 <h3 class="steps__no">Stap 2</h3>
                 <h2 class="steps__question">Vind een montagepartner</h2>
@@ -64,18 +64,17 @@ export default {
             ]
         };
     },
+    activated() {
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
+    },
 };
 </script>
 
 <style>
-.steps__help {
-    color: #898989;
-    white-space: nowrap;
-    font-size: 1rem;
-    font-family: "Gilroy-Regular", sans-serif;
-    margin-top: 0;
-    margin-bottom: 1.25rem;
-}
+
 
 .partners .formulate-input-group-item {
     border-top: 1px solid #e4e4e4;
@@ -84,6 +83,8 @@ export default {
 }
 .partners {
     padding: 1.25rem 0;
+    flex-direction: row !important;
+    gap: 1rem !important;
 }
 .partners .checkbox-container {
     margin-top: 0;
@@ -92,6 +93,7 @@ export default {
 .partner .flex {
     align-items: center;
     margin: 5px 0;
+    flex-direction: row ;
 }
 .partner h3 {
     margin-top: 0;

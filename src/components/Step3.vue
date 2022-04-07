@@ -1,10 +1,10 @@
 <template>
-   <div class="container">
+   <div class="container step-3">
         <h1 class="steps__title bold">
             Bereken eenvoudig de kosten met onze tool
         </h1>
         <div class="flex">
-            <StepsProgressBar step="3" />
+            <StepsProgressBar :step="3" />
             <div class="steps__form">
                 <h3 class="steps__no">Stap 3</h3>
                 <h2 class="steps__question">Kies bijpassende raamdecoratie</h2>
@@ -24,15 +24,17 @@
                         Nee: 'Nee',
                     }"
                 />
-                     <div class="flex border-top decoration-container" v-for="decoration in window_decoration" :key="decoration">
-                        <FormulateInput
-                            type="checkbox"
-                            :name="decoration"
-                            element-class="checkbox-container"
-                            :id="decoration"
-                        />
-                        <label :for="decoration" class="decoration flex"><img src="../assets/icons/window.png" /><h3>{{decoration}}</h3></label>
-                    </div>
+                     <div v-if="formData['window decoration'] == 'Ja'">
+                         <div class="flex border-top decoration-container" v-for="decoration in window_decoration" :key="decoration">
+                            <FormulateInput
+                                type="checkbox"
+                                :name="decoration"
+                                element-class="checkbox-container"
+                                :id="decoration"
+                            />
+                            <label :for="decoration" class="decoration flex"><img src="../assets/icons/window.png" /><h3>{{decoration}}</h3></label>
+                                             </div>
+                     </div>
                  </FormulateForm>
 
                 {{formData}}
@@ -57,6 +59,12 @@ export default {
 
         };
     },
+    activated() {
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
+    },
 }
 </script>
 
@@ -67,6 +75,10 @@ export default {
 .decoration-container {
     padding: 1.5rem 0;
     gap: 0;
+    flex-direction: row !important;
+}
+.decoration-container .decoration {
+    flex-direction: row;
 }
 .decoration h3 {
     font-family: "Gilroy-Semibold", sans-serif;
@@ -76,5 +88,14 @@ export default {
 .decoration img {
     border: 1px solid #F4F5F7;
     margin-left: 1.8rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .decoration img {
+        max-width: 70px;
+        max-height: 70px;
+        margin:0 1rem;
+
+    }
 }
 </style>

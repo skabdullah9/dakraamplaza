@@ -62,6 +62,7 @@ body {
 }
 .flex {
     display: flex;
+    gap: 1rem;
 }
 button {
     outline: none;
@@ -80,4 +81,15 @@ button:focus {
 .border-top {
    border-top: 1px solid #e4e4e4;
 }
+
+
+@media only screen and (max-width: 768px){
+
+     .flex {
+          gap: 0.5rem;
+         flex-direction: column;
+     }
+}
+
+
 </style>

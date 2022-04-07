@@ -1,15 +1,15 @@
 <template>
-    <div class="container">
+    <div class="container step-4">
         <h1 class="steps__title bold">
             Bereken eenvoudig de kosten met onze tool
         </h1>
         <div class="flex">
-            <StepsProgressBar step="4" />
+            <StepsProgressBar :step="4" />
             <div class="steps__form">
                 <h3 class="steps__no">Stap 4</h3>
                 <h2 class="steps__question">Jouw contactinformatie</h2>
 
-                <FormulateForm v-model="formData">
+                <FormulateForm v-model="formData" @submit="send">
                     <FormulateInput
                         name="firstname"
                         placeholder="Voornaam"
@@ -30,7 +30,7 @@
                         name="email"
                         placeholder="E-mailadres"
                         type="email"
-                        validation="required"
+                        validation="bail|required|email"
                     />
                     <FormulateInput
                         type="textarea"
@@ -39,8 +39,14 @@
                         placeholder="Voeg een bericht toe (niet verplicht)"
 
                     />
+                    <FormulateInput
+                        type="submit"
+                        value="submit"
+                        element-class="proceed-btn"
+
+                    />
                 </FormulateForm>
-                <NavigationBtns proceed="ThankYou" back="Step3" />
+                <NavigationBtns proceed="ThankYou" back="Step3" proceedBtnValue="Aanvraag versturen" />
             </div>
         </div>
     </div>
@@ -58,6 +64,17 @@ export default {
         return {
             formData: {},
         };
+    },
+    methods: {
+        send() {
+            console.log('submitted')
+        }
+    },
+    activated() {
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
     },
 };
 </script>

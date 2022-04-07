@@ -6,7 +6,13 @@
 
 <script>
 export default {
-    props: ['step']
+    props: {
+        step: {
+            type: Number,
+            required: true,
+            default: 1
+        }
+    }
 }
 </script>
 
@@ -17,7 +23,6 @@ export default {
     gap: 2.3rem;
     margin: 0 5rem;
     counter-reset: steps;
-    box-sizing: content-box;
 }
 
 .progressBarStep {
@@ -30,21 +35,17 @@ export default {
     align-items: center;
     color: white;
     font-size: 1.5rem;
+    box-sizing: border-box;
     position: relative;
-
-    /* outline-offset: 0.25rem; */
 
 }
 .progressBarStep.complete {
     background-color: #FF0083;
-
-
 }
 .progressBarStep.active {
-    outline-color: #FF0083;
-     border: .3rem solid white;
+     border: 4px solid white;
      outline: 1px solid #FF0083;
-     padding: 1rem;
+     padding: 1.1rem;
 }
 .progressBarStep::before {
     counter-increment: steps;
@@ -61,7 +62,26 @@ export default {
 }
 .progressBarStep.complete:not(:last-of-type)::after {
     background-color: #FF0083;
-    /* top:110%;
-    height: 2.5rem; */
+}
+
+
+@media only screen and (max-width: 768px) {
+    .progressBar {
+        flex-direction: row;
+        margin: 0;
+        margin-top: 3.1rem;
+        margin-bottom: 2.1rem;
+    }
+    .progressBarStep:not(:last-of-type)::after {
+    position: absolute;
+    content: '';
+    left:100%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 1px;
+    background-color: #E4E4E4;
+    z-index: -1;
+}
 }
 </style>

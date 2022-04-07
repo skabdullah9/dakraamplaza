@@ -1,16 +1,12 @@
 <template>
-    <div class="container">
-        <h1 class="steps__title bold">
-            Bereken eenvoudig de kosten met onze tool
-        </h1>
+    <div class="container step-1">
+        <h1 class="steps__title">Bereken eenvoudig de kosten met onze tool</h1>
         <div class="flex">
-            <StepsProgressBar step="1" />
+            <StepsProgressBar :step="1" />
             <div class="steps__form">
                 <h3 class="steps__no">Stap 1</h3>
-                <h2 class="steps__question">
-                    Welk type montage?
-                </h2>
-                <Accordion :formData="formData['Dakraam plaatsen']" >
+                <h2 class="steps__question">Welk type montage?</h2>
+                <Accordion :formData="formData['Dakraam plaatsen']">
                     <template v-slot:title>
                         <span>Dakraam plaatsen</span>
                     </template>
@@ -47,7 +43,7 @@
                                         :options="{ 1: 1 }"
                                     />
                                 </FormulateInput>
-                                 <FormulateInput
+                                <FormulateInput
                                     type="radio"
                                     element-class="checkbox-container"
                                     label-class="checkbox-label"
@@ -164,7 +160,11 @@
                     element-class="checkbox-container"
                     :label-class="['checkbox-label', 'border-top']"
                     validation="required"
-                    v-model="formData['Wil je dat wij het oude dakraam + verpakkingsmateriaal afvoeren?']"
+                    v-model="
+                        formData[
+                            'Wil je dat wij het oude dakraam + verpakkingsmateriaal afvoeren?'
+                        ]
+                    "
                     name="Wil je dat wij het oude dakraam + verpakkingsmateriaal afvoeren?"
                     label="Wil je dat wij het oude dakraam + verpakkingsmateriaal afvoeren?"
                     :options="{
@@ -174,8 +174,11 @@
                 />
                 <div class="total flex border-top">
                     <div class="total__text">
-                        <h2>Geschatte prijs: </h2>
-                        <p class="gray">incl. montage, voorrijkosten en <br> BFX (waterkerend manchet)</p>
+                        <h2>Geschatte prijs:</h2>
+                        <p class="gray">
+                            incl. montage, voorrijkosten en <br />
+                            BFX (waterkerend manchet)
+                        </p>
                     </div>
                     <div class="total__price">
                         <h1>€ 1159,00</h1>
@@ -184,28 +187,33 @@
                 <NavigationBtns proceed="Step2" back="Home" />
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
 import Accordion from "./Accordion.vue";
 import StepsProgressBar from "./StepsProgressBar.vue";
-import NavigationBtns from './NavigationBtns.vue'
+import NavigationBtns from "./NavigationBtns.vue";
 export default {
     components: {
         Accordion,
         StepsProgressBar,
-        NavigationBtns
+        NavigationBtns,
     },
     data() {
         return {
-            count: 1,
             formData: {
                 "Aftimmering binnenzijde?": "Ja",
-                "Wil je dat wij het oude dakraam + verpakkingsmateriaal afvoeren?": "Ja"
+                "Wil je dat wij het oude dakraam + verpakkingsmateriaal afvoeren?":
+                    "Ja",
             },
         };
+    },
+    activated() {
+        window.scroll({
+            top: 0,
+            left: 0,
+        });
     },
 };
 </script>
@@ -220,19 +228,6 @@ export default {
     max-width: 400px;
     width: 100%;
 }
-.navigation-buttons {
-    padding: 3rem 0;
-}
-.navigation-buttons button {
-    color: #ff0083;
-    border: 1px solid #ff0083;
-    padding: 1rem 3.5rem;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-family: "Gilroy-SemiBold", sans-serif;
-}
 
 .checkbox_container p {
     white-space: nowrap;
@@ -243,12 +238,11 @@ export default {
 .checkbox label {
     padding-left: 0.5rem;
 }
-.flex {
-    gap: 1rem;
-}
+
 .total {
     justify-content: space-between;
     align-items: center;
+    flex-direction: row;
 }
 .total__text h2 {
     margin-bottom: 0;
@@ -261,14 +255,22 @@ export default {
     line-height: 21px;
 }
 .total__price h1 {
-    font-size: 36px;
-    color: #FF0083;
-     font-family: 'Gilroy-Bold', sans-serif;
+    font-size: calc(26px + (36 - 26) * ((100vw - 300px) / (1600 - 300)));
+    color: #ff0083;
+    font-family: "Gilroy-Bold", sans-serif;
 }
-.navigation-buttons {
-    justify-content: space-between;
-}
+
 .back-btn img {
     transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 768px) {
+    .steps__form {
+        margin-top: 0;
+    }
+    .total,
+    .form-wrapper .flex {
+        flex-direction: row !important;
+    }
 }
 </style>
