@@ -134,7 +134,7 @@ div[data-type="select"]::after {
     pointer-events: revert;
     z-index: -1;
 }
-div[data-type="select"] select {
+    div[data-type="select"] select {
     padding: 1.25rem 2.5rem;
     font-size: 1rem;
     border: 1px solid #c4c4c4;
@@ -282,6 +282,9 @@ div[data-type="select"] select[data-placeholder-selected] {
     textarea,
     div[data-type="select"] select {
         padding: 1.25rem;
+    }
+    div[data-type="select"] select {
+        max-width: initial;
     }
 }
 </style>
