@@ -8,6 +8,14 @@
             Terug
         </button>
         <button
+           v-if="proceedBtnValue !== 'Verder'"
+            class="proceed-btn active send-request"
+        >
+            {{ proceedBtnValue }}
+            <img src="../assets/icons/chevron_pink.png" alt="" />
+        </button>
+         <button
+             v-else
             class="proceed-btn active"
             @click="$parent.$emit('changeComponent', proceed)"
         >
@@ -60,6 +68,10 @@ export default {
 }
 .proceed-btn.active img {
     filter: brightness(0) invert(1);
+}
+.send-request {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
 }
 @media only screen and (max-width: 768px) {
     #navigation-buttons {

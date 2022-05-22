@@ -94,7 +94,6 @@ export default {};
     min-height: 100vh;
     overflow: hidden;
 }
-
 .left {
     background: url("../assets/img/BG.png");
     background-size: cover;
@@ -122,7 +121,6 @@ export default {};
     max-width: 22ch;
     margin-bottom: 2.5rem;
 }
-
 .right {
     padding: 1.8rem 4rem;
 }
@@ -165,7 +163,6 @@ export default {};
 .step__four {
     padding: 1.5rem 0;
 }
-
 @media only screen and (max-width: 768px) {
     .home > .flex {
         flex-direction: column-reverse;

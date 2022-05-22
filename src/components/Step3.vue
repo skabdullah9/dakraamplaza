@@ -28,24 +28,22 @@
                         <div
                             class="flex border-top decoration-container"
                             id="decoration-container"
-                            v-for="decoration in window_decoration"
-                            :key="decoration"
+                            v-for="(decoration, index) in window_decoration"
+                            :key="decoration+index"
                         >
                             <FormulateInput
                                 type="checkbox"
-                                :name="decoration"
+                                :name="decoration+index"
                                 element-class="checkbox-container"
-                                :id="decoration"
+                                :id="decoration+index"
                             />
-                            <label :for="decoration" class="decoration flex"
+                            <label :for="decoration+index" class="decoration flex"
                                 ><img src="../assets/icons/window.png" />
                                 <h3>{{ decoration }}</h3></label
                             >
                         </div>
                     </div>
                 </FormulateForm>
-
-                {{ formData }}
                 <NavigationBtns proceed="Step4" back="Step2" />
             </div>
         </div>
@@ -68,6 +66,11 @@ export default {
                 "VELUX Verduisterend rolgordijn + plissé",
                 "VELUX insectenhor",
                 "VELUX Jaloezie",
+                "VELUX Lichtdoorlatend plissé",
+                "VELUX Lichtdoorlatend rolgordijn",
+                "VELUX Lichtdoorlatend rolgordijn",
+                "VELUX Lichtdoorlatend rolgordijn",
+                "VELUX Lichtdoorlatend rolgordijn"
             ],
         };
     },

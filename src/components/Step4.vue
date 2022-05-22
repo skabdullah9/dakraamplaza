@@ -38,15 +38,12 @@
                         rows="4"
                         placeholder="Voeg een bericht toe (niet verplicht)"
                     />
-                    <FormulateInput
-                        type="submit"
-                        value="submit"
-                        element-class="proceed-btn"
-                    />
+
                 </FormulateForm>
                 <NavigationBtns
                     proceed="ThankYou"
                     back="Step3"
+                    @click="send"
                     proceedBtnValue="Aanvraag versturen"
                 />
             </div>
