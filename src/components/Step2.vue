@@ -21,6 +21,7 @@
             placeholder="Huisnummer"
             validation="required"
           />
+          <p class="address">{{postcodeInfo.label}}</p>
           <div
             class="flex partners border-top"
             id="partners"
@@ -37,18 +38,16 @@
               ><h3>{{ partner.Name }}</h3>
               <div class="flex">
                 {{ partner.Rating }}
-                <!-- <img src="../assets/icons/stars.png" alt="" /> -->
+
                 <ul class="rating flex justify-center mb-0">
                   <li v-for="i in 5" :key="i">
-
                     <svg
                       v-if="i <= Math.floor(partner.Rating)"
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      style="width:1rem; color:#eab308"
-
+                      style="width: 1rem; color: #eab308"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
                     >
@@ -59,12 +58,15 @@
                     </svg>
 
                     <svg
-                    v-else-if="!Number.isInteger(partner.Rating) && i == Math.ceil(partner.Rating)"
+                      v-else-if="
+                        !Number.isInteger(partner.Rating) &&
+                        i == Math.ceil(partner.Rating)
+                      "
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star-half-alt"
-                      style="width:1rem; color:#eab308"
+                      style="width: 1rem; color: #eab308"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 536 512"
@@ -80,7 +82,7 @@
                       focusable="false"
                       data-prefix="far"
                       data-icon="star"
-                      style="width:1rem; color:#eab308"
+                      style="width: 1rem; color: #eab308"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -93,25 +95,40 @@
                   </li>
                 </ul>
                 (148) | 1.7 km <br />
-
               </div>
               <div>
                 {{ partner.City }}<br />
                 Gemiddelde responstijd:{{ partner["Average response time"] }}
               </div>
-              </label
-            >
+            </label>
           </div>
         </FormulateForm>
-        <button class="show-more-btn" @click="partnersToShow += 10">
+        <div v-if="Object.keys(postcodeInfo).length !== 0">
+          <button class="show-more-btn" @click="partnersToShow += 10">
           Toon meer
           <img src="../assets/icons/chevron_pink.png" alt="" />
         </button>
         <p class="show-more-help">
           Wij adviseren u één of maximaal twee partners te selecteren.
         </p>
-
-        <NavigationBtns proceed="Step3" back="Step1" />
+        </div>
+        <NavigationBtns v-if="Object.keys(formData).length >= 2" :btnActive="Object.keys(formData).length >= 2 ? true : false" proceed="Step3" back="Step1" />
+        <div v-else class="flex navigation-buttons" id="navigation-buttons">
+        <button
+            class="back-btn"
+            @click="$emit('changeComponent', 'Step1')"
+        >
+            <img src="../assets/icons/chevron_pink.png" alt="" />
+            Terug
+        </button>
+         <button
+            class="proceed-btn active"
+            @click="postcodeToGeolocation"
+        >
+            Zoeken
+            <img src="../assets/icons/chevron_pink.png" alt="" />
+        </button>
+    </div>
       </div>
     </div>
   </div>
@@ -129,18 +146,8 @@ export default {
     return {
       formData: {},
       partnersToShow: 10,
-      partners: [
-        {
-          Name: "Dakraam Vervangservice",
-          City: "Leiderdorp",
-          partner_response: " Gemiddelde responstijd: binnen een dag",
-        },
-        {
-          Name: "Bendabouw Geveltechniek",
-          City: "Nootdorp",
-          partner_response: "Gemiddelde responstijd: 6 dagen",
-        },
-      ],
+      postcodeInfo: {},
+      partners: [],
     };
   },
   activated() {
@@ -154,15 +161,27 @@ export default {
   methods: {
     async fetchPartners() {
       const partners = await require("../assets/Montage-partners-info.json");
-      //    const data = await fetch('../assets/Montage-partners-info.json')
-      // const res = await data.json()
       this.partners = partners.Sheet1;
-    },
 
+    },
+    async postcodeToGeolocation() {
+      const request = await fetch('http://api.positionstack.com/v1/forward?access_key=c40da789683a0f4f869c76a5f50a41bb&query=' + this.formData.postcode)
+      const response = await request.json()
+      this.postcodeInfo = response.data['0']
+
+      console.log(response.data['0']);
+    }
   },
   computed: {
     getPartners() {
-      return this.partners.slice(0, this.partnersToShow);
+      console.log(this.postcodeInfo);
+      console.log(this.formData);
+      if(!this.postcodeInfo) return []
+      return this.partners.filter(partner =>
+      Math.floor(partner["Latitude and longitude"].split(',')[0]) == Math.floor(+this.postcodeInfo.latitude)  &&
+       Math.floor(partner["Latitude and longitude"].split(',')[1]) == Math.floor(+this.postcodeInfo.longitude))
+      .slice(0, this.partnersToShow);
+
     },
   },
 };
@@ -214,12 +233,14 @@ export default {
   white-space: nowrap;
   font-size: 1rem;
   font-family: "Gilroy-Regular", sans-serif;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 .rating {
   gap: 0rem !important;
   padding: 0;
   list-style: none;
 }
-
+.address {
+  margin-left: 2.5rem;
+}
 </style>

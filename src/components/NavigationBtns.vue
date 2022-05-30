@@ -7,19 +7,12 @@
             <img src="../assets/icons/chevron_pink.png" alt="" />
             Terug
         </button>
-        <button
-           v-if="proceedBtnValue !== 'Verder'"
-            class="proceed-btn active send-request"
-        >
-            {{ proceedBtnValue }}
-            <img src="../assets/icons/chevron_pink.png" alt="" />
-        </button>
          <button
-             v-else
-            class="proceed-btn active"
+            class="proceed-btn"
+            :class="{'active': btnActive}"
             @click="$parent.$emit('changeComponent', proceed)"
         >
-            {{ proceedBtnValue }}
+            Verder
             <img src="../assets/icons/chevron_pink.png" alt="" />
         </button>
     </div>
@@ -38,9 +31,10 @@ export default {
             required: true,
             default: "Home",
         },
-        proceedBtnValue: {
-            type: String,
-            default: "Verder",
+        btnActive: {
+            type: Boolean,
+            required: true,
+            default: false,
         },
     },
 };
@@ -48,12 +42,13 @@ export default {
 
 <style>
 .navigation-buttons {
-    padding: 3rem 0;
+    padding-bottom: 3rem ;
+    padding-top: 1rem;
     justify-content: space-between;
 }
 .navigation-buttons button {
     color: #ff0083;
-    border: 1px solid #ff0083;
+
     padding: 1rem 3.5rem;
     font-size: 1rem;
     display: flex;
@@ -62,12 +57,20 @@ export default {
     gap: 1rem;
     font-family: "Gilroy-SemiBold", sans-serif;
 }
+.proceed-btn {
+    pointer-events: none;
+    border: 1px solid #ff0083;
+}
 .proceed-btn.active {
     background-color: #ff0083;
     color: white;
+    pointer-events: all;
 }
 .proceed-btn.active img {
     filter: brightness(0) invert(1);
+}
+.back-btn {
+    padding-left: 0 !important;
 }
 .send-request {
     padding-left: 22px !important;

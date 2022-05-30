@@ -67,7 +67,7 @@
                   />
                   <FormulateInput
                     type="select"
-                    name="Maat (b x h)"
+                    name="Maat"
                     placeholder="Maat (b x h)"
                     :options="{
                       'CK01 (55 x 70)': 'CK01 (55 x 70)',
@@ -101,7 +101,18 @@
                     type="select"
                     name="Aantal"
                     placeholder="Aantal"
-                    :options="{ 1: 1 }"
+                    :options="{
+                      1: 1,
+                      2: 2,
+                      3: 3,
+                      4: 4,
+                      5: 5,
+                      6: 6,
+                      7: 7,
+                      8: 8,
+                      9: 9,
+                      10: 10,
+                    }"
                   />
                 </FormulateInput>
               </FormulateForm>
@@ -127,7 +138,15 @@
                     type="select"
                     name="Code oude dakraam"
                     placeholder="Code oude dakraam"
+                    @change="codeOldWindow($event)"
                     :options="{
+                      '9, 101, C01': '9, 101, C01',
+                      '102, C02': '102, C02',
+                      '6, 104, C04': '6, 104, C04',
+                      '5, 206, F06': '5, 206, F06',
+                      '1, 304, M04': '1, 304, M04',
+                      '14, 306, M06': '14, 306, M06',
+                      '2, 308, M08': '2, 308, M08',
                       '425, P25': '425, P25',
                       '601, S01': '601, S01',
                       '4, 606, S06': '4, 606, S06',
@@ -142,7 +161,31 @@
                     name="Gewenste maat (b x h)"
                     placeholder="Gewenste maat (b x h)"
                     :options="{
+                      'CK01 (55 x 70)': 'CK01 (55 x 70)',
                       'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      'CK04 (55 x 98)': 'CK04 (55 x 98)',
+                      'CK06 (55 x 118)': 'CK06 (55 x 118)',
+                      'FFK06 (127 x 118)': 'FFK06 (127 x 118)',
+                      'FFK08 (127 x 140)': 'FFK08 (127 x 140)',
+                      'FFKF06 (188 x 118)': 'FFKF06 (188 x 118)',
+                      'FFKF08 (188 x 140)': 'FFKF08 (188 x 140)',
+                      'FK04 (66 x 98)': 'FK04 (66 x 98)',
+                      'FK06 (66 x 118)': 'FK06 (66 x 118)',
+                      'FK08 (66 x 140)': 'FK08 (66 x 140)',
+                      'FMK06 (139 x 118)': 'FMK06 (139 x 118)',
+                      'FMK08 (139 x 140)': 'FMK08 (139 x 140)',
+                      'FPK06 (94 x 118) (155 x 118)':
+                        'FPK06 (94 x 118) (155 x 118)',
+                      'FPK08 (94 x 140) (155 x 140)':
+                        'FPK08 (94 x 140) (155 x 140)',
+                      'MK04 (78 x 98)': 'MK04 (78 x 98)',
+                      'MK06 (78 x 118)': 'MK06 (78 x 118)',
+                      'MK08 (78 x 140)': 'MK08 (78 x 140)',
+                      'MK10 (78 x 160)': 'MK10 (78 x 160)',
+                      'MK12 (78 x 180)': 'MK12 (78 x 180)',
+                      'MMK06 (151 x 118)': 'MMK06 (151 x 118)',
+                      'MMK08 (151 x 140)': 'MMK08 (151 x 140)',
+                      'PK04 (94 x 98)': 'PK04 (94 x 98)',
                     }"
                   />
                   <FormulateInput
@@ -150,7 +193,12 @@
                     name="Gewenst type"
                     placeholder="Gewenst type"
                     :options="{
-                      'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      Tuimelvenster: 'Tuimelvenster',
+                      Uitzettuimelvenster: 'Uitzettuimelvenster',
+                      '2-in-1 (tuimel)': '2-in-1 (tuimel)',
+                      '2-in-1 (uitzettuimel)': '2-in-1 (uitzettuimel)',
+                      '3-in-1 (tuimel)': '3-in-1 (tuimel)',
+                      '3-in-1 (uitzettuimel)': '3-in-1 (uitzettuimel)',
                     }"
                   />
                   <FormulateInput
@@ -158,7 +206,10 @@
                     name="Gewenst materiaal"
                     placeholder="Gewenst materiaal"
                     :options="{
-                      'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      'Grenenhout, wit afgelakt': 'Grenenhout, wit afgelakt',
+                      'Grenenhout, blank afgelakt':
+                        'Grenenhout, blank afgelakt',
+                      'Kunststof, wit gelakt': 'Kunststof, wit gelakt',
                     }"
                   />
                   <FormulateInput
@@ -166,7 +217,10 @@
                     name="Gewenst glastype"
                     placeholder="Gewenst glastype"
                     :options="{
-                      'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      '66 top comfort': '66 top comfort',
+                      '68 extra comfort': '68 extra comfort',
+                      '70 comfort (standaard)': '70 comfort (standaard)',
+                      '69 warmtewerend': '69 warmtewerend',
                     }"
                   />
                   <FormulateInput
@@ -174,14 +228,27 @@
                     name="Gewenste bediening"
                     placeholder="Gewenste bediening"
                     :options="{
-                      'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      Handbediend: 'Handbediend',
+                      'Elektrisch (netstroom)': 'Elektrisch (netstroom)',
+                      'Zonne-energie': 'Zonne-energie',
                     }"
                   />
                   <FormulateInput
                     type="select"
                     name="Aantal"
                     placeholder="Aantal"
-                    :options="{ 1: 1 }"
+                    :options="{
+                      1: 1,
+                      2: 2,
+                      3: 3,
+                      4: 4,
+                      5: 5,
+                      6: 6,
+                      7: 7,
+                      8: 8,
+                      9: 9,
+                      10: 10,
+                    }"
                   />
                 </FormulateInput>
               </FormulateForm>
@@ -220,7 +287,31 @@
                     name="Gewenste maat"
                     placeholder="Gewenste maat"
                     :options="{
-                      Tuimelvenster: 'Tuimelvenster',
+                      'CK01 (55 x 70)': 'CK01 (55 x 70)',
+                      'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      'CK04 (55 x 98)': 'CK04 (55 x 98)',
+                      'CK06 (55 x 118)': 'CK06 (55 x 118)',
+                      'FFK06 (127 x 118)': 'FFK06 (127 x 118)',
+                      'FFK08 (127 x 140)': 'FFK08 (127 x 140)',
+                      'FFKF06 (188 x 118)': 'FFKF06 (188 x 118)',
+                      'FFKF08 (188 x 140)': 'FFKF08 (188 x 140)',
+                      'FK04 (66 x 98)': 'FK04 (66 x 98)',
+                      'FK06 (66 x 118)': 'FK06 (66 x 118)',
+                      'FK08 (66 x 140)': 'FK08 (66 x 140)',
+                      'FMK06 (139 x 118)': 'FMK06 (139 x 118)',
+                      'FMK08 (139 x 140)': 'FMK08 (139 x 140)',
+                      'FPK06 (94 x 118) (155 x 118)':
+                        'FPK06 (94 x 118) (155 x 118)',
+                      'FPK08 (94 x 140) (155 x 140)':
+                        'FPK08 (94 x 140) (155 x 140)',
+                      'MK04 (78 x 98)': 'MK04 (78 x 98)',
+                      'MK06 (78 x 118)': 'MK06 (78 x 118)',
+                      'MK08 (78 x 140)': 'MK08 (78 x 140)',
+                      'MK10 (78 x 160)': 'MK10 (78 x 160)',
+                      'MK12 (78 x 180)': 'MK12 (78 x 180)',
+                      'MMK06 (151 x 118)': 'MMK06 (151 x 118)',
+                      'MMK08 (151 x 140)': 'MMK08 (151 x 140)',
+                      'PK04 (94 x 98)': 'PK04 (94 x 98)',
                     }"
                   />
                   <FormulateInput
@@ -228,32 +319,62 @@
                     name="Gewenst type"
                     placeholder="Gewenst type"
                     :options="{
-                      'CK02 (55 x 78)': 'CK02 (55 x 78)',
+                      Tuimelvenster: 'Tuimelvenster',
+                      Uitzettuimelvenster: 'Uitzettuimelvenster',
+                      '2-in-1 (tuimel)': '2-in-1 (tuimel)',
+                      '2-in-1 (uitzettuimel)': '2-in-1 (uitzettuimel)',
+                      '3-in-1 (tuimel)': '3-in-1 (tuimel)',
+                      '3-in-1 (uitzettuimel)': '3-in-1 (uitzettuimel)',
                     }"
                   />
                   <FormulateInput
                     type="select"
                     name="Gewenst materiaal"
                     placeholder="Gewenst materiaal"
-                    :options="{ 1: 1 }"
+                    :options="{
+                      'Grenenhout, wit afgelakt': 'Grenenhout, wit afgelakt',
+                      'Grenenhout, blank afgelakt':
+                        'Grenenhout, blank afgelakt',
+                      'Kunststof, wit gelakt': 'Kunststof, wit gelakt',
+                    }"
                   />
                   <FormulateInput
                     type="select"
                     name="Gewenst glastype"
                     placeholder="Gewenst glastype"
-                    :options="{ 1: 1 }"
+                    :options="{
+                      '66 top comfort': '66 top comfort',
+                      '68 extra comfort': '68 extra comfort',
+                      '70 comfort (standaard)': '70 comfort (standaard)',
+                      '69 warmtewerend': '69 warmtewerend',
+                    }"
                   />
                   <FormulateInput
                     type="select"
                     name="Gewenste bediening"
                     placeholder="Gewenste bediening"
-                    :options="{ 1: 1 }"
+                    :options="{
+                      Handbediend: 'Handbediend',
+                      'Elektrisch (netstroom)': 'Elektrisch (netstroom)',
+                      'Zonne-energie': 'Zonne-energie',
+                    }"
                   />
                   <FormulateInput
                     type="select"
                     name="Aantal"
                     placeholder="Aantal"
-                    :options="{ 1: 1 }"
+                    :options="{
+                      1: 1,
+                      2: 2,
+                      3: 3,
+                      4: 4,
+                      5: 5,
+                      6: 6,
+                      7: 7,
+                      8: 8,
+                      9: 9,
+                      10: 10,
+                    }"
                   />
                 </FormulateInput>
               </FormulateForm>
@@ -261,11 +382,7 @@
           </template>
         </Accordion>
 
-        <div
-          v-show="renderPrice"
-          class="total flex border-top"
-          id="total"
-        >
+        <div v-if="renderPrice" class="total flex border-top" id="total">
           <div class="total__text">
             <h2>Geschatte prijs:</h2>
             <p class="gray">
@@ -277,7 +394,11 @@
             <h1>€ {{ renderPrice.toFixed(2) }}</h1>
           </div>
         </div>
-        <NavigationBtns proceed="Step2" back="Home" />
+        <NavigationBtns
+          :btnActive="renderPrice ? true : false"
+          proceed="Step2"
+          back="Home"
+        />
       </div>
     </div>
   </div>
@@ -297,21 +418,27 @@ export default {
     return {
       formData: {},
       allValues: [],
-      selectedObjects: []
+      selectedObjects: [],
+      newDakraam: {},
     };
   },
-  activated() {
+  async activated() {
     window.scroll({
       top: 0,
       left: 0,
     });
-    this.getJsonValues();
+    await this.getJsonValues();
   },
   computed: {
     renderPrice() {
-      this.getPrice()
-      return this.selectedObjects.reduce((acc, val) => acc + val['Price'], 0)
-    }
+      if (this.getPrice()) {
+        return this.selectedObjects.reduce(
+          (acc, val) => acc + val["Price"] * val["Aantal"],
+          0
+        );
+      }
+      return 0;
+    },
   },
   methods: {
     getJsonValues() {
@@ -322,26 +449,77 @@ export default {
     },
     getPrice() {
       let formDetails = JSON.parse(JSON.stringify(this.formData));
-      console.log(formDetails["Dakraam plaatsen"]);
-      if(!formDetails['Dakraam plaatsen']) return false
+      let mountingTypes = Object.keys(formDetails);
+      console.log(mountingTypes);
+      console.log(formDetails);
+      if (mountingTypes == false) return false;
+      if (!Object.hasOwn(formDetails, "Dakraam plaatsen")) return false;
+      let newDakraam =
+        formDetails["Dakraam plaatsen"][
+          formDetails["Dakraam plaatsen"].length - 1
+        ];
+      this.newDakraam = newDakraam;
       let targetObj = this.allValues.find(
         (obj) =>
-          obj["Type dakraam"] ==
-          formDetails["Dakraam plaatsen"][formDetails["Dakraam plaatsen"].length - 1]["Type dakraam"] &&
-          obj["Materiaal"] ==
-          formDetails["Dakraam plaatsen"][formDetails["Dakraam plaatsen"].length - 1]["Materiaal"] &&
-          obj["Glastype"] ==
-          formDetails["Dakraam plaatsen"][formDetails["Dakraam plaatsen"].length - 1]["Glastype"] &&
-          obj["Bediening"] ==
-          formDetails["Dakraam plaatsen"][formDetails["Dakraam plaatsen"].length - 1]["Bediening"]
+          obj["Type dakraam"] == newDakraam["Type dakraam"] &&
+          obj["Materiaal"] == newDakraam["Materiaal"] &&
+          obj["Glastype"] == newDakraam["Glastype"] &&
+          obj["Bediening"] == newDakraam["Bediening"] &&
+          obj["Maat"] == newDakraam["Maat"] &&
+          newDakraam["Aantal"] != null
       );
 
-      if(targetObj) {
-        this.selectedObjects.push(targetObj)
-      }
-        console.log(targetObj, JSON.parse(JSON.stringify(this.selectedObjects)));
+      if (targetObj) {
+        targetObj.Aantal = +newDakraam["Aantal"];
+        let obj = this.selectedObjects.findIndex(
+          (obj) => JSON.stringify(obj) == JSON.stringify(targetObj)
+        );
+        console.log(obj);
+        if (obj >= 0) {
+          this.selectedObjects[obj] = targetObj;
+        } else if (formDetails["Dakraam plaatsen"].length === 1) {
+          this.selectedObjects = [targetObj];
+        } else {
+          this.selectedObjects.push(targetObj);
+        }
+        return true;
+      } else return false;
+    },
+    codeOldWindow(e) {
+      if (Object.keys(this.newDakraam).length < 6) return false;
+      const veluxWindow =
+        this.formData["VELUX dakraam vervangen"][
+          this.formData["VELUX dakraam vervangen"].length - 1
+        ];
+      this.formData["Niet-VELUX dakraam vervangen"] = [{}];
+      const nonVeluxWindow =
+        this.formData["Niet-VELUX dakraam vervangen"][
+          this.formData["Niet-VELUX dakraam vervangen"].length - 1
+        ];
+      console.log(JSON.parse(JSON.stringify(this.newDakraam)));
+      const desiredMaat = this.allValues.find(
+        (obj) => obj["Code oude dakraam"] == e.target.value
+      );
 
-    }
+      veluxWindow["Gewenste maat (b x h)"] = desiredMaat["Maat"];
+      veluxWindow["Gewenst type"] = this.newDakraam["Type dakraam"];
+      veluxWindow["Gewenst materiaal"] = this.newDakraam["Materiaal"];
+      veluxWindow["Gewenst glastype"] = this.newDakraam["Glastype"];
+      veluxWindow["Gewenste bediening"] = this.newDakraam["Bediening"];
+      veluxWindow["Aantal"] = this.newDakraam["Aantal"];
+
+      const bxh = desiredMaat["Maat"].replace(/\s/g, "").split("x");
+      const [breadth, height] = [bxh[0].slice(-2), bxh[1].slice(0, 2)];
+
+      nonVeluxWindow["breadth"] = breadth;
+      nonVeluxWindow["height"] = height;
+      nonVeluxWindow["Gewenste maat"] = desiredMaat["Maat"];
+      nonVeluxWindow["Gewenst type"] = this.newDakraam["Type dakraam"];
+      nonVeluxWindow["Gewenst materiaal"] = this.newDakraam["Materiaal"];
+      nonVeluxWindow["Gewenst glastype"] = this.newDakraam["Glastype"];
+      nonVeluxWindow["Gewenste bediening"] = this.newDakraam["Bediening"];
+      nonVeluxWindow["Aantal"] = this.newDakraam["Aantal"];
+    },
   },
 };
 </script>

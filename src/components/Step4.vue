@@ -44,7 +44,6 @@
                     proceed="ThankYou"
                     back="Step3"
                     @click="send"
-                    proceedBtnValue="Aanvraag versturen"
                 />
             </div>
         </div>

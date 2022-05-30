@@ -44,7 +44,8 @@
                         </div>
                     </div>
                 </FormulateForm>
-                <NavigationBtns proceed="Step4" back="Step2" />
+                <NavigationBtns :btnActive="Object.keys(formData).length ? true : false" proceed="Step4" back="Step2" />
+
             </div>
         </div>
     </div>
