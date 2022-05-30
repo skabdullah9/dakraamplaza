@@ -418,7 +418,7 @@ export default {
     return {
       formData: {},
       allValues: [],
-      selectedObjects: [],
+      selectedDakraams: [],
       newDakraam: {},
     };
   },
@@ -432,7 +432,7 @@ export default {
   computed: {
     renderPrice() {
       if (this.getPrice()) {
-        return this.selectedObjects.reduce(
+        return this.selectedDakraams.reduce(
           (acc, val) => acc + val["Price"] * val["Aantal"],
           0
         );
@@ -449,38 +449,34 @@ export default {
     },
     getPrice() {
       let formDetails = JSON.parse(JSON.stringify(this.formData));
-      let mountingTypes = Object.keys(formDetails);
-      console.log(mountingTypes);
-      console.log(formDetails);
-      if (mountingTypes == false) return false;
       if (!Object.hasOwn(formDetails, "Dakraam plaatsen")) return false;
-      let newDakraam =
+
+      this.newDakraam =
         formDetails["Dakraam plaatsen"][
           formDetails["Dakraam plaatsen"].length - 1
         ];
-      this.newDakraam = newDakraam;
-      let targetObj = this.allValues.find(
+      if(Object.keys(this.newDakraam).length < 6) return false
+      let targetDakraam = this.allValues.find(
         (obj) =>
-          obj["Type dakraam"] == newDakraam["Type dakraam"] &&
-          obj["Materiaal"] == newDakraam["Materiaal"] &&
-          obj["Glastype"] == newDakraam["Glastype"] &&
-          obj["Bediening"] == newDakraam["Bediening"] &&
-          obj["Maat"] == newDakraam["Maat"] &&
-          newDakraam["Aantal"] != null
+          obj["Type dakraam"] == this.newDakraam["Type dakraam"] &&
+          obj["Materiaal"] == this.newDakraam["Materiaal"] &&
+          obj["Glastype"] == this.newDakraam["Glastype"] &&
+          obj["Bediening"] == this.newDakraam["Bediening"] &&
+          obj["Maat"] == this.newDakraam["Maat"] &&
+          this.newDakraam["Aantal"] != null
       );
 
-      if (targetObj) {
-        targetObj.Aantal = +newDakraam["Aantal"];
-        let obj = this.selectedObjects.findIndex(
-          (obj) => JSON.stringify(obj) == JSON.stringify(targetObj)
+      if (targetDakraam) {
+        targetDakraam.Aantal = +this.newDakraam["Aantal"];
+        let dakraamIndex = this.selectedDakraams.findIndex(
+          (obj) => JSON.stringify(obj) == JSON.stringify(targetDakraam)
         );
-        console.log(obj);
-        if (obj >= 0) {
-          this.selectedObjects[obj] = targetObj;
+        if (dakraamIndex >= 0) {
+          this.selectedDakraams[dakraamIndex] = targetDakraam;
         } else if (formDetails["Dakraam plaatsen"].length === 1) {
-          this.selectedObjects = [targetObj];
+          this.selectedDakraams = [targetDakraam];
         } else {
-          this.selectedObjects.push(targetObj);
+          this.selectedDakraams.push(targetDakraam);
         }
         return true;
       } else return false;
@@ -496,7 +492,6 @@ export default {
         this.formData["Niet-VELUX dakraam vervangen"][
           this.formData["Niet-VELUX dakraam vervangen"].length - 1
         ];
-      console.log(JSON.parse(JSON.stringify(this.newDakraam)));
       const desiredMaat = this.allValues.find(
         (obj) => obj["Code oude dakraam"] == e.target.value
       );
