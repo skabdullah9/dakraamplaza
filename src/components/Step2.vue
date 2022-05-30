@@ -165,7 +165,7 @@ export default {
 
     },
     async postcodeToGeolocation() {
-      const request = await fetch('http://api.positionstack.com/v1/forward?access_key=c40da789683a0f4f869c76a5f50a41bb&query=' + this.formData.postcode)
+      const request = await fetch('https://cors-anywhere.herokuapp.com/http://api.positionstack.com/v1/forward?access_key=c40da789683a0f4f869c76a5f50a41bb&query=' + this.formData.postcode)
       const response = await request.json()
       this.postcodeInfo = response.data['0']
 
